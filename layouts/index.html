@@ -1,79 +1,87 @@
 {{ define "main" }}
-  {{/* Bootstrap: container | Tailwind: py-8 */}}
-  <div class="container py-8">
+<div class="page-enter">
 
-    {{/* Section Title */}}
-    <h2 class="text-xl font-bold mb-6 text-gray-700">3 Ways to Make 50% Columns</h2>
-
-    {{/* ROW 1: Pure Bootstrap */}}
-    <div class="row mb-6">
-      <div class="col-12 col-lg-6">
-        <div class="bg-primary text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Bootstrap: col-12 col-lg-6</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 col-lg-6</code>
-          </p>
-        </div>
-      </div>
-      <div class="col-12 col-lg-6">
-        <div class="bg-primary text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Bootstrap: col-12 col-lg-6</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 col-lg-6</code>
-          </p>
-        </div>
+  {{/* Blade 1 — deep full-bleed hero */}}
+  <section class="hero-deep">
+    <div class="hero-media">
+      {{ partial "placeholder.html" (dict "label" "full-bleed ocean photograph — swimmer / horizon" "tone" "deep") }}
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="shell">
+      <div class="eyebrow on-deep">Fiction &middot; Poetry &middot; Essays</div>
+      <h1>Everything I know, I learned at the water's <em>edge</em>.</h1>
+      <p class="hero-lede">
+        Novel Waters is the writing home of a coastal storyteller — short fiction, poetry,
+        and essays about the ocean and the people who can't stay away from it.
+      </p>
+      <div class="hero-actions">
+        <a class="nw-btn nw-btn-on-deep" href="{{ "/fiction-and-poetry/" | relURL }}">Read the latest <span class="arr">&rarr;</span></a>
+        <a class="nw-btn nw-btn-on-deep" style="background: transparent;" href="{{ "/about/" | relURL }}">About the writer</a>
       </div>
     </div>
+  </section>
 
-    {{/* ROW 2: Pure Tailwind */}}
-    <div class="row mb-6">
-      <div class="w-full lg:w-1/2 px-3">
-        <div class="bg-emerald-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Tailwind: w-full lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">w-full lg:w-1/2</code>
-          </p>
-        </div>
+  {{/* Blade 2 — latest writing, asymmetric masonry */}}
+  {{ $posts := where .Site.RegularPages "Section" "in" (slice "fiction-and-poetry" "nonfiction") }}
+  {{ $latest := first 3 $posts.ByDate.Reverse }}
+  {{ with $latest }}
+  <section class="shell latest-posts">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">From the journal</div>
+        <h2 class="kicker-h2">Latest writing</h2>
       </div>
-      <div class="w-full lg:w-1/2 px-3">
-        <div class="bg-emerald-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Tailwind: w-full lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">w-full lg:w-1/2</code>
-          </p>
+      <a class="tlink" href="{{ "/fiction-and-poetry/" | relURL }}">All pieces <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="masonry">
+      {{ range first 1 . }}
+        <div class="masonry-feat">
+          {{ partial "post-card.html" (dict "page" . "big" true) }}
         </div>
+      {{ end }}
+      <div class="masonry-rest">
+        {{ range after 1 . }}
+          {{ partial "post-card.html" (dict "page" .) }}
+        {{ end }}
       </div>
     </div>
+  </section>
+  {{ end }}
 
-    {{/* ROW 3: Mixed - Bootstrap + Tailwind */}}
-    <div class="row mb-6">
-      <div class="col-12 lg:w-1/2">
-        <div class="bg-purple-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Mixed: col-12 lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 lg:w-1/2</code>
-          </p>
-        </div>
+  {{/* Blade 3 — about */}}
+  <section class="about-blade-section">
+    <div class="shell about-blade">
+      <div class="about-portrait">
+        {{ partial "placeholder.html" (dict "label" "portrait — at the shore") }}
       </div>
-      <div class="col-12 lg:w-1/2">
-        <div class="bg-purple-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Mixed: col-12 lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 lg:w-1/2</code>
-          </p>
-        </div>
+      <div>
+        <div class="eyebrow">About</div>
+        <h2 class="kicker-h2">I write to keep the tide <em>close</em>.</h2>
+        <p class="lede">
+          I grew up in a town the sea was always trying to reclaim. These days I write about
+          water and the people drawn to it — in fiction, in poetry, and in essays from the cold edge of the morning swim.
+        </p>
+        <p class="about-more">
+          My work has appeared in small journals and quiet anthologies, and most often right here,
+          published whenever the writing is ready rather than when a schedule says it should be.
+        </p>
+        <a class="tlink" href="{{ "/about/" | relURL }}">Read more about me <span class="arr">&rarr;</span></a>
       </div>
     </div>
+  </section>
 
-    {{/* Legend */}}
-    <div class="mt-8 p-4 bg-white rounded-lg shadow">
-      <h4 class="font-bold mb-3">Color Legend:</h4>
-      <ul class="list-unstyled mb-0 d-flex gap-4 flex-wrap">
-        <li><span class="bg-primary text-white px-2 py-1 rounded text-sm">Blue</span> = Bootstrap classes</li>
-        <li><span class="bg-emerald-600 text-white px-2 py-1 rounded text-sm">Green</span> = Tailwind classes</li>
-        <li><span class="bg-purple-600 text-white px-2 py-1 rounded text-sm">Purple</span> = Mixed approach</li>
-      </ul>
+  {{/* Blade 4 — submissions / collaboration CTA */}}
+  <section class="submissions-blade">
+    <div class="shell">
+      <div class="eyebrow on-deep center">An open door</div>
+      <h2>We're looking for submissions, and writers to <em>collaborate</em> with.</h2>
+      <p class="submissions-lede">
+        If you write fiction, poetry, or essays that smell of salt — or you have an idea you'd
+        like to make together — I would genuinely love to read it.
+      </p>
+      <a class="nw-btn nw-btn-on-deep nw-btn-inverse" href="{{ "/contact/" | relURL }}">Submit or get in touch <span class="arr">&rarr;</span></a>
     </div>
+  </section>
 
-  </div>
+</div>
 {{ end }}

@@ -1,0 +1,20 @@
+{{/*
+  Post card for the home masonry.
+  Usage: {{ partial "post-card.html" (dict "page" . "big" true) }}
+*/}}
+{{- $p := .page -}}
+{{- $big := .big | default false -}}
+{{- $cat := $p.Params.category | default ($p.Section | humanize) -}}
+<a href="{{ $p.RelPermalink }}" class="post-card{{ if $big }} post-card-feat{{ end }}">
+  <div class="post-card-media">
+    {{ partial "placeholder.html" (dict "label" (printf "%s — cover image" (lower $cat))) }}
+  </div>
+  <span class="tag">{{ $cat }}</span>
+  <h3>{{ $p.Title }}</h3>
+  <p class="post-card-excerpt">{{ $p.Params.excerpt | default $p.Summary }}</p>
+  <div class="post-card-meta">
+    <span>{{ $p.Date.Format "January 2006" }}</span>
+    <span class="sep">&mdash;</span>
+    <span>{{ $p.Params.read | default (printf "%d min" $p.ReadingTime) }} read</span>
+  </div>
+</a>
