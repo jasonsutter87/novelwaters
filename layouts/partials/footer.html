@@ -15,17 +15,12 @@
     </div>
     <div>
       <div class="foot-h">Explore</div>
-      <a href="{{ "/" | relURL }}" class="foot-link">Home</a>
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL | relURL }}" class="foot-link">{{ .Name }}</a>
-      {{ end }}
-    </div>
-    <div>
-      <div class="foot-h">Elsewhere</div>
-      <a href="#" class="foot-link">Instagram</a>
-      <a href="#" class="foot-link">Substack</a>
-      <a href="#" class="foot-link">Bluesky</a>
-      <a href="{{ "/contact" | relURL }}" class="foot-link">Newsletter</a>
+      <div class="foot-links-cols">
+        <a href="{{ "/" | relURL }}" class="foot-link">Home</a>
+        {{ range .Site.Menus.main }}
+          <a href="{{ .URL | relURL }}" class="foot-link">{{ .Name }}</a>
+        {{ end }}
+      </div>
     </div>
   </div>
   <div class="footer-bottom">

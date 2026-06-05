@@ -567,7 +567,7 @@ em, .it {
 }
 .site-footer .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -599,6 +599,16 @@ em, .it {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
   margin-bottom: 16px;
+}
+.site-footer .foot-links-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+}
+@media (max-width: 560px) {
+  .site-footer .foot-links-cols {
+    grid-template-columns: 1fr;
+  }
 }
 .site-footer .foot-link {
   display: block;
