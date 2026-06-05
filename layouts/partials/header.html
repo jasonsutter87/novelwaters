@@ -1,38 +1,31 @@
-{{/* Accessible header with mobile menu */}}
-<div class="container py-4">
-  <nav class="d-flex justify-content-between align-items-center" aria-label="Primary navigation">
-    {{/* Logo/Site Title */}}
-    <a href="/" class="text-white text-decoration-none fw-bold text-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded">
-      {{ .Site.Title }}
-    </a>
+{{/* Novel Waters fixed nav — transparent over deep hero on home, frosted on scroll (see nav.js) */}}
+<div class="shell">
+  {{/* Wordmark */}}
+  <a href="{{ "/" | relURL }}" class="wordmark" aria-label="Novel Waters — home">
+    <span class="wordmark-text">Novel <em>Waters</em></span>
+    <svg class="wordmark-wave" width="118" height="6" viewBox="0 0 118 6" fill="none" aria-hidden="true">
+      <path d="M1 3.5 C 11 0.5, 21 0.5, 31 3.5 S 51 6.5, 61 3.5 S 81 0.5, 91 3.5 S 111 6.5, 117 3.5"
+            stroke-width="1" fill="none" stroke-linecap="round" />
+    </svg>
+  </a>
 
-    {{/* Mobile menu button */}}
-    <button
-      type="button"
-      class="d-md-none text-white bg-transparent border-0 p-2 focus:outline-none focus:ring-2 focus:ring-white rounded"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');"
-    >
-      {{/* Hamburger icon */}}
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-
-    {{/* Desktop menu */}}
-    <ul class="list-unstyled d-none d-md-flex gap-4 mb-0">
-      <li><a href="/" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-1">Home</a></li>
-      <li><a href="/about" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-1">About</a></li>
-      <li><a href="/contact" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-1">Contact</a></li>
-    </ul>
+  {{/* Desktop menu */}}
+  <nav class="nav-desktop" aria-label="Main navigation">
+    {{ range .Site.Menus.main }}
+      <a href="{{ .URL | relURL }}" {{ if or ($.IsMenuCurrent "main" .) (hasPrefix $.RelPermalink .URL) }}class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{ end }}
   </nav>
 
-  {{/* Mobile menu (hidden by default) */}}
-  <ul id="mobile-menu" class="hidden list-unstyled d-md-none mt-4 pb-2">
-    <li class="py-2 border-b border-gray-700"><a href="/" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded block py-1">Home</a></li>
-    <li class="py-2 border-b border-gray-700"><a href="/about" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded block py-1">About</a></li>
-    <li class="py-2"><a href="/contact" class="text-white text-decoration-none hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded block py-1">Contact</a></li>
-  </ul>
+  {{/* Burger */}}
+  <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile">
+    <span></span><span></span><span></span>
+  </button>
 </div>
+
+{{/* Mobile overlay menu */}}
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+  <a href="{{ "/" | relURL }}">Home</a>
+  {{ range .Site.Menus.main }}
+    <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+  {{ end }}
+</nav>
