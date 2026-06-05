@@ -1,0 +1,436 @@
+// ==========================================================================
+// NOVEL WATERS — base / shared primitives
+// shell, eyebrow, buttons, text links, placeholders, prose, forms
+// ==========================================================================
+
+@use 'tokens' as *;
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  @include nw-small {
+    font-size: 16px;
+  }
+}
+
+::selection {
+  background: var(--teal-wash);
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  margin: 0;
+}
+
+em, .it {
+  font-style: italic;
+}
+
+// ---- Layout shell -------------------------------------------------------
+.shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.center { text-align: center; }
+.muted { color: var(--ink-soft); }
+.faint { color: var(--ink-faint); }
+
+// ---- Eyebrow label ------------------------------------------------------
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  &::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  &.center::before {
+    display: none;
+  }
+
+  &.on-deep {
+    color: rgba(255, 255, 255, 0.85);
+
+    &::before {
+      background: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
+
+.hr-rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+// ---- Buttons ------------------------------------------------------------
+.nw-btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all .25s ease;
+  white-space: nowrap;
+
+  .arr {
+    transition: transform .25s ease;
+  }
+
+  &:hover .arr {
+    transform: translateX(4px);
+  }
+
+  &.nw-btn-solid {
+    background: var(--ink);
+    color: var(--paper);
+
+    &:hover {
+      background: var(--teal-deep);
+    }
+  }
+
+  &.nw-btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+
+    &:hover {
+      border-color: var(--ink);
+    }
+  }
+
+  &.nw-btn-on-deep {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+
+    &:hover {
+      background: #fff;
+      color: var(--deep);
+      border-color: #fff;
+    }
+  }
+
+  &.nw-btn-inverse {
+    background: #fff;
+    color: var(--deep);
+    border-color: #fff;
+  }
+}
+
+// ---- Underlined text link -----------------------------------------------
+.tlink {
+  position: relative;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  .arr {
+    transition: transform .25s ease;
+  }
+
+  &:hover .arr {
+    transform: translateX(4px);
+  }
+}
+
+// ---- Image placeholder (swap for real photos later) -----------------------
+.ph {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+
+  svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ph-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: #{$nw-font-mono};
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    text-align: center;
+    padding: 16px;
+  }
+
+  &.ph-deep {
+    background: var(--deep);
+
+    .ph-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  img, .ph-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// ---- Typography helpers ---------------------------------------------------
+.kicker-h2 {
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.lede {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2vw, 23px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+// ---- Page intro / prose ---------------------------------------------------
+.page-head {
+  padding-top: clamp(132px, 18vh, 188px);
+  padding-bottom: clamp(40px, 6vh, 68px);
+
+  h1 {
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-top: 18px;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin-top: 22px;
+    max-width: 60ch;
+  }
+
+  &.page-head-center {
+    text-align: center;
+
+    h1, .lede {
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      justify-content: center;
+    }
+  }
+}
+
+.prose {
+  font-family: var(--font-display);
+  color: var(--ink-soft);
+  font-size: 19px;
+  line-height: 1.75;
+
+  p {
+    margin: 0 0 1.3em;
+    max-width: 64ch;
+  }
+
+  p:first-child::first-letter {
+    font-size: 4.4em;
+    line-height: 0.8;
+    float: left;
+    padding: 8px 14px 0 0;
+    color: var(--teal-deep);
+    font-family: var(--font-display);
+
+    @include nw-small {
+      font-size: 3.4em;
+    }
+  }
+}
+
+// ---- Page enter animation -------------------------------------------------
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.page-enter > * {
+  animation: fadeUp .6s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter > * {
+    animation: none;
+  }
+}
+
+// ---- Form fields ----------------------------------------------------------
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  input, textarea, select {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 14px 16px;
+    width: 100%;
+    transition: border-color .2s ease, box-shadow .2s ease;
+
+    &::placeholder {
+      color: var(--ink-faint);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--teal-wash);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+    line-height: 1.55;
+  }
+
+  &.err input,
+  &.err textarea,
+  &.err select {
+    border-color: #{$nw-error};
+  }
+}
+
+.err-msg {
+  color: #b54b41;
+  font-size: 12.5px;
+}
+
+.filebox {
+  border: 1px dashed var(--line);
+  border-radius: 2px;
+  padding: 22px 18px;
+  text-align: center;
+  background: var(--paper-2);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  display: block;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--teal-wash);
+  }
+}
+
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  button {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 9px 16px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all .2s ease;
+
+    &[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+  }
+}
