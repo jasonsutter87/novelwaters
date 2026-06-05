@@ -1,0 +1,100 @@
+{{ define "main" }}
+<div class="page-enter">
+
+  <header class="shell page-head">
+    <div class="eyebrow">Contact</div>
+    <h1>Say hello, send a piece, or start <em>something</em>.</h1>
+    <p class="lede">Whether you have a poem in a drawer, an essay half-written, or just want to talk about the sea — this reaches me directly.</p>
+  </header>
+
+  <section class="shell contact-section">
+    {{/* Left rail */}}
+    <aside class="contact-rail">
+      <div class="rail-block">
+        <span class="tag">Email</span>
+        <a href="mailto:{{ .Site.Params.email }}" class="tlink rail-email">{{ .Site.Params.email }}</a>
+      </div>
+      <div class="rail-block">
+        <span class="tag">Response time</span>
+        <p>A week or two for notes, a little longer for full submissions.</p>
+      </div>
+      <div class="rail-block">
+        <span class="tag">What to send</span>
+        <ul>
+          <li>Fiction up to ~4,000 words</li>
+          <li>Up to 5 poems in one document</li>
+          <li>Essays &amp; pitches welcome</li>
+          <li>.doc, .pdf or .txt</li>
+        </ul>
+      </div>
+    </aside>
+
+    {{/* Netlify Forms — honeypot + multipart for the manuscript upload */}}
+    <form name="novel-waters-contact" method="POST" data-netlify="true"
+          netlify-honeypot="bot-field" enctype="multipart/form-data" action="/contact/?sent=1">
+      <input type="hidden" name="form-name" value="novel-waters-contact" />
+      <input type="hidden" name="reason" value="General" data-reason-input />
+      <p class="hidden" aria-hidden="true">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div class="form-block" style="margin-top: 0; margin-bottom: 26px;">
+        <span class="form-label">I'm writing about</span>
+        <div class="seg" data-reason-seg>
+          <button type="button" aria-pressed="true" data-reason="General">General</button>
+          <button type="button" aria-pressed="false" data-reason="Submission">Submission</button>
+          <button type="button" aria-pressed="false" data-reason="Collaboration">Collaboration</button>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="form-grid-2 form-block" data-show-for="Submission" hidden>
+        <div class="field">
+          <label for="cf-genre">Genre</label>
+          <select id="cf-genre" name="genre">
+            <option>Fiction</option>
+            <option>Poetry</option>
+            <option>Nonfiction</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cf-title">Title of piece</label>
+          <input id="cf-title" name="title" placeholder="e.g. Low Water" />
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="field">
+          <label for="cf-message" data-message-label>Message</label>
+          <textarea id="cf-message" name="message" placeholder="Say as much or as little as you like…" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-block" data-show-for="Submission Collaboration" hidden>
+        <span class="form-label">Attach your manuscript</span>
+        <label class="filebox">
+          <input type="file" name="manuscript" accept=".doc,.docx,.pdf,.txt,.rtf" class="hidden" data-filebox-input />
+          <div class="filebox-title" data-filebox-title>Drop a file or click to upload</div>
+          <div class="filebox-hint">.doc, .docx, .pdf, .txt or .rtf &mdash; up to 10 MB</div>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="nw-btn nw-btn-solid" data-submit-label>Send message <span class="arr">&rarr;</span></button>
+        <span class="form-aside">I read every message myself.</span>
+      </div>
+    </form>
+  </section>
+
+</div>
+{{ end }}
