@@ -1,0 +1,270 @@
+// ==========================================================================
+// NOVEL WATERS — home page blades
+// 1. Deep full-bleed hero  2. Latest posts masonry
+// 3. About blade           4. Submissions CTA
+// ==========================================================================
+
+@use 'tokens' as *;
+
+// ---- Blade 1: deep hero -----------------------------------------------------
+.hero-deep {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  overflow: hidden;
+
+  .hero-media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(20, 38, 54, 0.55) 0%,
+      rgba(20, 38, 54, 0.15) 38%,
+      rgba(18, 34, 50, 0.78) 100%);
+  }
+
+  .shell {
+    position: relative;
+    width: 100%;
+    padding-top: 140px;
+    padding-bottom: clamp(64px, 12vh, 132px);
+  }
+
+  h1 {
+    font-size: clamp(44px, 7.5vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 24px 0 0;
+    max-width: 16ch;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .hero-lede {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.5;
+    max-width: 52ch;
+    margin-top: 26px;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+}
+
+// ---- Blade 2: latest posts ---------------------------------------------------
+.latest-posts {
+  padding-top: clamp(72px, 11vh, 128px);
+  padding-bottom: clamp(64px, 9vh, 104px);
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 44px;
+
+    .kicker-h2 {
+      margin-top: 16px;
+    }
+  }
+}
+
+.masonry {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+
+  @include nw-mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.masonry-rest {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 56px);
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+
+  .post-card-media {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    .ph {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  &.post-card-feat .post-card-media .ph {
+    aspect-ratio: 4 / 3.4;
+  }
+
+  .ph > svg,
+  .ph > img {
+    transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+  }
+
+  &:hover .ph > svg,
+  &:hover .ph > img {
+    transform: scale(1.04);
+  }
+
+  h3 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.1;
+    margin: 10px 0 0;
+    letter-spacing: -0.01em;
+    transition: color .25s ease;
+  }
+
+  &.post-card-feat h3 {
+    font-size: clamp(28px, 3vw, 40px);
+  }
+
+  &:hover h3 {
+    color: var(--teal-deep);
+  }
+
+  .post-card-excerpt {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    line-height: 1.55;
+    margin-top: 12px;
+    max-width: 60ch;
+    color: var(--ink-soft);
+  }
+
+  &.post-card-feat .post-card-excerpt {
+    font-size: 19px;
+  }
+
+  .post-card-meta {
+    display: flex;
+    gap: 14px;
+    margin-top: 16px;
+    font-size: 13px;
+    align-items: center;
+    color: var(--ink-faint);
+
+    .sep { opacity: .4; }
+  }
+}
+
+// ---- Blade 3: about ------------------------------------------------------
+.about-blade-section {
+  background: var(--paper-2);
+}
+
+.about-blade {
+  padding-top: clamp(72px, 11vh, 120px);
+  padding-bottom: clamp(72px, 11vh, 120px);
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(36px, 6vw, 88px);
+  align-items: center;
+
+  @include nw-mobile {
+    grid-template-columns: 1fr;
+  }
+
+  .about-portrait {
+    position: relative;
+
+    .ph {
+      aspect-ratio: 4 / 5;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -14px;
+      right: -14px;
+      width: 96px;
+      height: 96px;
+      border: 1px solid var(--accent);
+    }
+  }
+
+  .kicker-h2 {
+    margin-top: 18px;
+
+    em { color: var(--teal-deep); }
+  }
+
+  .lede {
+    margin-top: 22px;
+  }
+
+  .about-more {
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 1.65;
+    margin-top: 18px;
+    max-width: 58ch;
+    color: var(--ink-soft);
+  }
+
+  .tlink {
+    margin-top: 28px;
+  }
+}
+
+// ---- Blade 4: submissions CTA ------------------------------------------------
+.submissions-blade {
+  background: var(--deep);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  .shell {
+    padding-top: clamp(80px, 13vh, 148px);
+    padding-bottom: clamp(80px, 13vh, 148px);
+    text-align: center;
+    position: relative;
+  }
+
+  h2 {
+    font-size: clamp(32px, 5vw, 62px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-top: 20px;
+    max-width: 20ch;
+    margin-inline: auto;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .submissions-lede {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 56ch;
+    margin-inline: auto;
+    margin-top: 22px;
+  }
+
+  .nw-btn {
+    margin-top: 38px;
+  }
+}
