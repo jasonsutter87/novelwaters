@@ -1,0 +1,158 @@
+// ==========================================================================
+// NOVEL WATERS — fixed site header / navigation
+// Transparent over the deep hero on home, frosted paper once scrolled.
+// State classes are toggled by assets/src/js/nav.js:
+//   .is-scrolled  — past 48px scroll
+//   .is-open      — mobile menu open
+//   .nav-over-hero — page has a deep hero (home), start transparent
+// ==========================================================================
+
+@use 'tokens' as *;
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: background .4s ease, border-color .4s ease, box-shadow .4s ease;
+  background: rgba(246, 252, 253, 0.88);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--line-soft);
+
+  .shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 86px;
+  }
+
+  // ---- Wordmark ----
+  .wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 5px;
+
+    .wordmark-text {
+      font-family: var(--font-display);
+      font-size: 25px;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+
+      em { font-style: italic; }
+    }
+
+    .wordmark-wave path {
+      stroke: var(--accent);
+    }
+  }
+
+  // ---- Desktop nav ----
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+
+    a {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      position: relative;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color .2s ease;
+
+      &:hover {
+        color: var(--ink);
+      }
+
+      &.active {
+        color: var(--ink);
+        border-bottom-color: var(--accent);
+      }
+    }
+
+    @include nw-mobile {
+      display: none;
+    }
+  }
+
+  // ---- Burger ----
+  .nav-burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+
+    span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--ink);
+      margin: 5px 0;
+      transition: transform .3s, opacity .3s;
+    }
+
+    @include nw-mobile {
+      display: block;
+    }
+  }
+
+  &.is-open .nav-burger {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  // ---- Mobile overlay menu ----
+  .nav-mobile {
+    position: fixed;
+    inset: 86px 0 0 0;
+    background: var(--paper);
+    z-index: 49;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+    padding: 32px var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    a {
+      font-family: var(--font-display);
+      font-size: 30px;
+      color: var(--ink);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+  }
+
+  &.is-open .nav-mobile {
+    transform: translateX(0);
+  }
+
+  // ---- Transparent-over-hero state (home, before scroll) ----
+  &.nav-over-hero:not(.is-scrolled):not(.is-open) {
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
+
+    .wordmark .wordmark-text { color: #fff; }
+    .wordmark .wordmark-wave path { stroke: rgba(255, 255, 255, 0.55); }
+
+    .nav-desktop a {
+      color: rgba(255, 255, 255, 0.92);
+
+      &.active {
+        border-bottom-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .nav-burger span {
+      background: #fff;
+    }
+  }
+}
