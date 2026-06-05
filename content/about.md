@@ -5,8 +5,8 @@ type: "about"
 url: "/about/"
 ---
 
-I grew up in a town the sea was always trying to reclaim — a place of slipways and foghorns, of boats hauled up the beach each autumn and slid back each spring. I learned to read the water before I learned to read books, and I have been trying to put the two together ever since.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-These days I write in three registers. Fiction, when a story needs people to carry it. Poetry, when a feeling is too slippery for plot. And essays, when I simply want to think out loud about tides, cold water, grief, kelp, lighthouses, and the strange comfort of being very small beside something very large.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 
-My work has appeared in a handful of small journals and quiet anthologies, but it lives most happily here, where I can publish a piece when it is ready rather than when a calendar says it should be. I write slowly, swim often, and believe the two are related.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
