@@ -1,17 +1,43 @@
 {{ define "main" }}
-<div class="container py-5">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+<div class="page-enter">
 
-  {{ if .Pages }}
-  <ul class="list-unstyled mt-4">
-    {{ range .Pages }}
-    <li class="mb-3">
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-      {{ if .Description }}<p class="text-muted mb-0">{{ .Description }}</p>{{ end }}
-    </li>
+  {{/* Page head — driven by section _index.md front matter */}}
+  <header class="shell page-head">
+    <div class="eyebrow">{{ .Params.eyebrow | default .Title }}</div>
+    <h1>{{ .Params.headline | default .Title | safeHTML }}</h1>
+    {{ with .Params.intro }}<p class="lede">{{ . }}</p>{{ end }}
+  </header>
+
+  <section class="shell archive-section">
+    {{/* Category filters (optional, from front matter) */}}
+    {{ with .Params.filters }}
+    <div class="seg" data-archive-filters>
+      <button type="button" aria-pressed="true" data-filter="All">All</button>
+      {{ range . }}
+        <button type="button" aria-pressed="false" data-filter="{{ . }}">{{ . }}</button>
+      {{ end }}
+    </div>
     {{ end }}
-  </ul>
-  {{ end }}
+
+    <div data-archive-list>
+      {{ range .Pages.ByDate.Reverse }}
+        {{ $cat := .Params.category | default (.Section | humanize) }}
+        <a href="{{ .RelPermalink }}" class="archive-row" data-cat="{{ $cat }}">
+          <div class="ar-date">
+            <span class="tag">{{ $cat }}</span>
+            {{ .Date.Format "January 2006" }} &middot; {{ .Params.read | default (printf "%d min" .ReadingTime) }}
+          </div>
+          <div>
+            <h3>{{ .Title }}</h3>
+            <p class="ar-excerpt">{{ .Params.excerpt | default .Summary }}</p>
+          </div>
+          <div class="ar-arrow" aria-hidden="true">&rarr;</div>
+        </a>
+      {{ end }}
+    </div>
+
+    <p class="archive-note">More pieces are added whenever the writing is ready.</p>
+  </section>
+
 </div>
 {{ end }}
