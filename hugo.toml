@@ -1,4 +1,4 @@
-baseURL = 'https://novelwaters.com/'
+baseURL = 'https://novelwaters.netlify.app/'
 languageCode = 'en-us'
 title = 'Novel Waters'
 
@@ -12,7 +12,7 @@ email = 'hello@novelwaters.com'
 baseURL = 'http://localhost:1313/'
 
 [environments.production]
-baseURL = 'https://novelwaters.com/'
+baseURL = 'https://novelwaters.netlify.app/'
 
 [[menus.main]]
 name = 'About'
