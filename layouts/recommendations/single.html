@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="page-enter">
+
+  <header class="shell page-head">
+    <div class="eyebrow">Recommendations</div>
+    <h1>What I'm <em>reading</em> by the water.</h1>
+    <p class="lede">A growing shelf of books about the ocean and the wild — the ones I press into people's hands.</p>
+  </header>
+
+  <section class="shell recs-section">
+    <div class="recs-grid">
+      {{ range $i, $r := .Site.Data.recommendations }}
+        <div class="rec">
+          <div class="rec-num">{{ printf "%02d" (add $i 1) }}</div>
+          <div>
+            <h3>{{ $r.title }}</h3>
+            <div class="tag rec-author">{{ $r.author }}</div>
+            <p class="rec-note">{{ $r.note }}</p>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+
+    <div class="recs-cta">
+      <h3>Read something I should know about?</h3>
+      <p>Send me the book that changed how you see the sea. I'm always building the shelf.</p>
+      <a class="nw-btn nw-btn-solid" href="{{ "/contact/" | relURL }}">Send a recommendation <span class="arr">&rarr;</span></a>
+    </div>
+  </section>
+
+</div>
+{{ end }}
