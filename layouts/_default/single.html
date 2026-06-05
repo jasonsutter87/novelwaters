@@ -1,3 +1,26 @@
 {{ define "main" }}
-  {{ .Content }}
+<div class="page-enter">
+
+  <header class="shell page-head">
+    {{ $cat := .Params.category | default (.Section | humanize) }}
+    <div class="eyebrow">{{ $cat }}</div>
+    <h1>{{ .Title }}</h1>
+    <p class="lede faint" style="font-size: 15px; font-family: var(--font-sans);">
+      {{ .Date.Format "January 2006" }} &middot; {{ .Params.read | default (printf "%d min" .ReadingTime) }} read
+    </p>
+  </header>
+
+  <section class="shell archive-section">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+
+    {{ with .Parent }}
+    <p style="margin-top: 48px;">
+      <a class="tlink" href="{{ .RelPermalink }}">&larr; Back to {{ .Title }}</a>
+    </p>
+    {{ end }}
+  </section>
+
+</div>
 {{ end }}
