@@ -520,10 +520,15 @@ em, .it {
   transform: translateY(-7px) rotate(-45deg);
 }
 .site-header .nav-mobile {
-  position: fixed;
-  inset: 86px 0 0 0;
-  background: var(--paper);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 86px);
+  height: calc(100svh - 86px);
+  background: #fff;
   z-index: 49;
+  overflow-y: auto;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   padding: 32px var(--gutter);
@@ -540,6 +545,9 @@ em, .it {
 }
 .site-header.is-open .nav-mobile {
   transform: translateX(0);
+}
+.site-header.is-open {
+  background: #fff;
 }
 .site-header.nav-over-hero:not(.is-scrolled):not(.is-open) {
   background: transparent;
