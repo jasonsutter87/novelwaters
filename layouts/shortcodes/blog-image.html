@@ -1,0 +1,15 @@
+{{/*
+  Blog image shortcode — pairs with the Decap CMS "Blog Image" editor component.
+  {{< blog-image src="/images/uploads/foo.jpg" alt="..." width="wide" align="left" caption="..." >}}
+  width: full (default) | wide | medium | narrow
+  align: center (default) | left | right
+*/}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $width := .Get "width" | default "full" -}}
+{{- $align := .Get "align" | default "center" -}}
+{{- $caption := .Get "caption" -}}
+<figure class="blog-image blog-image-{{ $width }} blog-image-{{ $align }}">
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" />
+  {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

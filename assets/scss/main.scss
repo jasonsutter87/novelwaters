@@ -18,6 +18,7 @@
 @use 'site/footer';
 @use 'site/home';
 @use 'site/pages';
+@use 'site/blog-image';
 
 // Tailwind layers - processed by PostCSS after Sass compiles
 @tailwind base;

@@ -1190,6 +1190,53 @@ em, .it {
   color: var(--ink-faint);
 }
 
+.blog-image {
+  margin: 1.5rem auto;
+}
+.blog-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+.blog-image figcaption {
+  font-family: var(--font-display);
+  font-style: italic;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 0.9em;
+  margin-top: 0.5rem;
+}
+.blog-image.blog-image-full {
+  width: 100%;
+}
+.blog-image.blog-image-wide {
+  width: 75%;
+}
+.blog-image.blog-image-medium {
+  width: 50%;
+}
+.blog-image.blog-image-narrow {
+  width: 33%;
+}
+.blog-image.blog-image-left {
+  float: left;
+  margin: 0.5rem 1.5rem 1rem 0;
+}
+.blog-image.blog-image-right {
+  float: right;
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+@media (max-width: 560px) {
+  .blog-image.blog-image-wide, .blog-image.blog-image-medium, .blog-image.blog-image-narrow {
+    width: 100%;
+  }
+  .blog-image.blog-image-left, .blog-image.blog-image-right {
+    float: none;
+    margin: 1.5rem auto;
+  }
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -2378,6 +2425,9 @@ a:focus-visible,
 }
 .visible{
   visibility: visible;
+}
+.collapse{
+  visibility: collapse;
 }
 .static{
   position: static;

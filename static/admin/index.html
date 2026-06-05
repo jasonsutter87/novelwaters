@@ -8,5 +8,73 @@
 <body>
   <!-- Include the script that builds the page and powers Netlify CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.registerEditorComponent({
+      id: "blog-image",
+      label: "Blog Image",
+      fields: [
+        { name: "src", label: "Image", widget: "image" },
+        { name: "alt", label: "Alt text (for accessibility)", widget: "string" },
+        {
+          name: "width",
+          label: "Width (optional — defaults to full)",
+          widget: "select",
+          required: false,
+          options: ["full", "wide", "medium", "narrow"],
+          default: "full"
+        },
+        {
+          name: "align",
+          label: "Alignment (optional — defaults to center)",
+          widget: "select",
+          required: false,
+          options: ["center", "left", "right"],
+          default: "center"
+        },
+        { name: "caption", label: "Caption (optional)", widget: "string", required: false }
+      ],
+      pattern: /^{{<\s*blog-image\s+([^>]+?)\s*>}}$/,
+      fromBlock: function (match) {
+        var attrs = match[1];
+        var get = function (k) {
+          var m = attrs.match(new RegExp(k + '="([^"]*)"'));
+          return m ? m[1] : "";
+        };
+        return {
+          src: get("src"),
+          alt: get("alt"),
+          width: get("width") || "full",
+          align: get("align") || "center",
+          caption: get("caption")
+        };
+      },
+      toBlock: function (obj) {
+        var esc = function (s) { return (s || "").replace(/"/g, '&quot;'); };
+        var parts = [
+          'src="' + esc(obj.src) + '"',
+          'alt="' + esc(obj.alt) + '"'
+        ];
+        if (obj.width && obj.width !== "full") parts.push('width="' + esc(obj.width) + '"');
+        if (obj.align && obj.align !== "center") parts.push('align="' + esc(obj.align) + '"');
+        if (obj.caption) parts.push('caption="' + esc(obj.caption) + '"');
+        return '{{< blog-image ' + parts.join(" ") + ' >}}';
+      },
+      toPreview: function (obj) {
+        var widthMap = { full: "100%", wide: "75%", medium: "50%", narrow: "33%" };
+        var w = widthMap[obj.width] || "100%";
+        var floatStyle = "";
+        if (obj.align === "left") floatStyle = "float:left;margin:0 1rem 1rem 0;";
+        else if (obj.align === "right") floatStyle = "float:right;margin:0 0 1rem 1rem;";
+        else floatStyle = "margin:1rem auto;display:block;";
+        var cap = obj.caption
+          ? '<figcaption style="font-style:italic;text-align:center;color:#666;font-size:0.9em;margin-top:0.5rem;">' + obj.caption + '</figcaption>'
+          : '';
+        return '<figure style="width:' + w + ';' + floatStyle + '">' +
+               '<img src="' + (obj.src || '') + '" alt="' + (obj.alt || '') + '" style="width:100%;height:auto;border-radius:10px;display:block;"/>' +
+               cap +
+               '</figure>';
+      }
+    });
+  </script>
 </body>
 </html>

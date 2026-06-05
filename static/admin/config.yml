@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: GROWDND/{{ .Site.Params.repoName }}
+  repo: jasonsutter87/novelwaters
   branch: master
 
 publish_mode: editorial_workflow
@@ -9,41 +9,41 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  # Blog
-  - label: "Blog"
-    name: "blogPages"
-    folder: "content/blog"
+  # Fiction & Poetry
+  - label: "Fiction & Poetry"
+    name: "fictionAndPoetry"
+    folder: "content/fiction-and-poetry"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Page Title (SEO)", name: "PageTitle", widget: "string", required: false }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "SEO Image", name: "image", widget: "image" }
-      - { label: "Image Alt", name: "alt", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Priority", name: "priority", widget: "string", default: "0.5" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Update Date", name: "updatedate", widget: "datetime", required: false }
-      - { label: "Type", name: "type", widget: "hidden", default: "blog" }
-      - { label: "JavaScript", name: "js", widget: "list", required: false }
-      - { label: "CSS", name: "css", widget: "list", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Fiction", "Poetry"] }
+      - { label: "Read time (e.g. 9 min)", name: "read", widget: "string", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # NonFiction
+  - label: "NonFiction"
+    name: "nonfiction"
+    folder: "content/nonfiction"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["Essay", "Column", "Reportage"] }
+      - { label: "Read time (e.g. 9 min)", name: "read", widget: "string", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   # Pages
   - label: "Pages"
     name: "pages"
     folder: "content"
-    create: true
+    create: false
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Page Title (SEO)", name: "PageTitle", widget: "string", required: false }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "SEO Image", name: "image", widget: "image", required: false }
-      - { label: "Priority", name: "priority", widget: "string", default: "0.5" }
-      - { label: "No Index", name: "noIndex", widget: "boolean", required: false }
-      - { label: "JavaScript", name: "js", widget: "list", required: false }
-      - { label: "CSS", name: "css", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }

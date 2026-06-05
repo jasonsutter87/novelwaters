@@ -1,0 +1,57 @@
+// ==========================================================================
+// NOVEL WATERS — blog-image shortcode (in-body images from the CMS)
+// ==========================================================================
+
+@use 'tokens' as *;
+
+.blog-image {
+  margin: 1.5rem auto;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+
+  figcaption {
+    font-family: var(--font-display);
+    font-style: italic;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+  }
+
+  // Widths
+  &.blog-image-full { width: 100%; }
+  &.blog-image-wide { width: 75%; }
+  &.blog-image-medium { width: 50%; }
+  &.blog-image-narrow { width: 33%; }
+
+  // Alignment
+  &.blog-image-left {
+    float: left;
+    margin: 0.5rem 1.5rem 1rem 0;
+  }
+
+  &.blog-image-right {
+    float: right;
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  // On small screens, floats collapse to full-width blocks
+  @include nw-small {
+    &.blog-image-wide,
+    &.blog-image-medium,
+    &.blog-image-narrow {
+      width: 100%;
+    }
+
+    &.blog-image-left,
+    &.blog-image-right {
+      float: none;
+      margin: 1.5rem auto;
+    }
+  }
+}
