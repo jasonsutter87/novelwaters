@@ -1,15 +1,35 @@
-{{/* Accessible footer with proper contrast */}}
-<div class="container py-5">
-  <div class="row">
-    {{/* Company info */}}
-    <div class="col-12 col-md-6 mb-4 mb-md-0">
-      <h4 class="fw-bold mb-3">{{ .Site.Title }}</h4>
-      {{/* Changed from text-gray-400 to text-gray-300 for WCAG AA compliance (4.5:1 contrast) */}}
-      <p class="text-gray-300 mb-0">{{ .Site.Params.companyName | default "Your Company" }}</p>
+{{/* Novel Waters deep footer */}}
+<svg class="wave-rule" width="100%" height="8" viewBox="0 0 1200 8" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 4 C 60 0, 120 0, 180 4 S 300 8, 360 4 S 480 0, 540 4 S 660 8, 720 4 S 840 0, 900 4 S 1020 8, 1080 4 S 1170 1, 1200 4"
+        stroke-width="1.2" fill="none" />
+</svg>
+
+<div class="shell footer-inner">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-wordmark">Novel <em>Waters</em></div>
+      <p class="footer-tagline">
+        Fiction, poetry and essays from the tide line. Writing for anyone who has ever
+        stood at the edge of the water and not wanted to leave.
+      </p>
     </div>
-    {{/* Copyright */}}
-    <div class="col-12 col-md-6 md:text-right">
-      <p class="text-gray-300 mb-0">&copy; {{ now.Year }} {{ .Site.Params.companyName | default "Your Company" }}. All rights reserved.</p>
+    <div>
+      <div class="foot-h">Explore</div>
+      <a href="{{ "/" | relURL }}" class="foot-link">Home</a>
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}" class="foot-link">{{ .Name }}</a>
+      {{ end }}
     </div>
+    <div>
+      <div class="foot-h">Elsewhere</div>
+      <a href="#" class="foot-link">Instagram</a>
+      <a href="#" class="foot-link">Substack</a>
+      <a href="#" class="foot-link">Bluesky</a>
+      <a href="{{ "/contact" | relURL }}" class="foot-link">Newsletter</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; {{ now.Year }} Novel Waters. All words her own.</span>
+    <span>Made with salt water &amp; long mornings.</span>
   </div>
 </div>
