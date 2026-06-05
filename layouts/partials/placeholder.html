@@ -1,0 +1,24 @@
+{{/*
+  Striped image placeholder — swap for real photos later.
+  Usage: {{ partial "placeholder.html" (dict "label" "portrait — at the shore" "tone" "light" "class" "extra-class") }}
+  tone: "light" (default) | "deep"
+*/}}
+{{- $label := .label | default "image" -}}
+{{- $tone := .tone | default "light" -}}
+{{- $class := .class | default "" -}}
+{{- $uid := printf "ph-%s" (substr (md5 $label) 0 8) -}}
+{{- $dark := eq $tone "deep" -}}
+{{- $a := cond $dark "rgba(255,255,255,0.05)" "rgba(40,70,95,0.05)" -}}
+{{- $b := cond $dark "rgba(255,255,255,0.02)" "rgba(40,70,95,0.02)" -}}
+<div class="ph {{ if $dark }}ph-deep{{ end }} {{ $class }}" aria-hidden="true">
+  <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+    <defs>
+      <pattern id="{{ $uid }}" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+        <rect width="7" height="7" fill="{{ $b }}" />
+        <rect width="3.5" height="7" fill="{{ $a }}" />
+      </pattern>
+    </defs>
+    <rect width="100" height="100" fill="url(#{{ $uid }})" />
+  </svg>
+  <div class="ph-label">[ {{ $label }} ]</div>
+</div>
