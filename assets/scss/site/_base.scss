@@ -145,6 +145,11 @@ em, .it {
     border-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(4px);
 
+    // Fully transparent variant — hover below still wins the cascade
+    &.nw-btn-clear {
+      background: transparent;
+    }
+
     &:hover {
       background: #fff;
       color: var(--deep);

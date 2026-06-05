@@ -161,6 +161,9 @@ em, .it {
   border-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(4px);
 }
+.nw-btn.nw-btn-on-deep.nw-btn-clear {
+  background: transparent;
+}
 .nw-btn.nw-btn-on-deep:hover {
   background: #fff;
   color: var(--deep);
