@@ -1,14 +1,40 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://novelwaters.com/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Novel Waters'
 
 [params]
-CompanyName = 'My Hugo Site'
-repoName = 'GitRepoName'
+CompanyName = 'Novel Waters'
+repoName = 'novelWaters'
+description = 'Fiction, poetry and essays from the tide line.'
+email = 'hello@novelwaters.com'
 
 [environments.development]
 baseURL = 'http://localhost:1313/'
 
 [environments.production]
-baseURL = 'https://example.org/'
+baseURL = 'https://novelwaters.com/'
 
+[[menus.main]]
+name = 'About'
+url = '/about/'
+weight = 10
+
+[[menus.main]]
+name = 'Fiction & Poetry'
+url = '/fiction-and-poetry/'
+weight = 20
+
+[[menus.main]]
+name = 'NonFiction'
+url = '/nonfiction/'
+weight = 30
+
+[[menus.main]]
+name = 'Recommendations'
+url = '/recommendations/'
+weight = 40
+
+[[menus.main]]
+name = 'Contact'
+url = '/contact/'
+weight = 50
