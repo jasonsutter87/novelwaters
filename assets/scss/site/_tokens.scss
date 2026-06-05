@@ -1,0 +1,64 @@
+// ==========================================================================
+// NOVEL WATERS — design tokens (literary / editorial coastal)
+// Ported from the approved mockup design system.
+// ==========================================================================
+
+// SCSS variables (for use in expressions)
+$nw-ink: #183042;
+$nw-ink-soft: #415968;
+$nw-ink-faint: #6a7e88;
+$nw-paper: #f6fcfd;
+$nw-paper-2: #ebf7f8;
+$nw-seaglass: #d6edec;
+$nw-line: #cedce0;
+$nw-line-soft: #dfeaed;
+$nw-teal: #398e97;
+$nw-teal-deep: #18626f;
+$nw-teal-wash: #def3f4;
+$nw-deep: #17364d;
+$nw-deep-2: #0d263b;
+$nw-error: #bb584d;
+
+$nw-font-display: "Newsreader", Georgia, "Times New Roman", serif;
+$nw-font-sans: "Mulish", ui-sans-serif, system-ui, sans-serif;
+$nw-font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+$nw-maxw: 1240px;
+
+// Mobile breakpoints from the mockup
+$nw-bp-nav: 900px;
+$nw-bp-small: 560px;
+
+@mixin nw-mobile {
+  @media (max-width: $nw-bp-nav) {
+    @content;
+  }
+}
+
+@mixin nw-small {
+  @media (max-width: $nw-bp-small) {
+    @content;
+  }
+}
+
+// CSS custom properties (runtime theming, mirrors the mockup :root)
+:root {
+  --ink: #{$nw-ink};
+  --ink-soft: #{$nw-ink-soft};
+  --ink-faint: #{$nw-ink-faint};
+  --paper: #{$nw-paper};
+  --paper-2: #{$nw-paper-2};
+  --seaglass: #{$nw-seaglass};
+  --line: #{$nw-line};
+  --line-soft: #{$nw-line-soft};
+  --teal: #{$nw-teal};
+  --teal-deep: #{$nw-teal-deep};
+  --teal-wash: #{$nw-teal-wash};
+  --deep: #{$nw-deep};
+  --deep-2: #{$nw-deep-2};
+  --accent: var(--teal);
+  --font-display: #{$nw-font-display};
+  --font-sans: #{$nw-font-sans};
+  --maxw: #{$nw-maxw};
+  --gutter: clamp(20px, 5vw, 72px);
+}
