@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="page-enter">
+
+  <header class="shell page-head">
+    <div class="eyebrow">About</div>
+    <h1>The writer behind <em>Novel Waters</em>.</h1>
+    <p class="lede">Coastal storyteller. Cold-water swimmer. Keeper of more notebooks than shelves.</p>
+  </header>
+
+  <section class="shell about-page">
+    {{/* Left rail — sticky portrait */}}
+    <div class="about-rail">
+      {{ partial "placeholder.html" (dict "label" "portrait — by the harbour") }}
+      <div class="about-rail-note">
+        Currently writing from a small town on the Atlantic coast, where the weather changes
+        faster than the plans.
+      </div>
+    </div>
+
+    <div>
+      <div class="prose">
+        {{ .Content }}
+      </div>
+
+      <blockquote>
+        <p>
+          "The sea does not reward those who are too anxious, too greedy, or too impatient. To dig for
+          treasures shows not only impatience and greed, but lack of faith."
+        </p>
+        <footer>&mdash; a line I keep above my desk</footer>
+      </blockquote>
+
+      <div class="about-facts">
+        <div>
+          <span class="tag">Writes</span>
+          <div class="fact-value">Fiction &middot; Poetry &middot; Essays</div>
+        </div>
+        <div>
+          <span class="tag">Near</span>
+          <div class="fact-value">The Atlantic coast</div>
+        </div>
+        <div>
+          <span class="tag">Swims</span>
+          <div class="fact-value">All year, badly</div>
+        </div>
+      </div>
+
+      <div class="about-actions">
+        <a class="nw-btn nw-btn-solid" href="{{ "/contact/" | relURL }}">Work with me <span class="arr">&rarr;</span></a>
+        <a class="nw-btn nw-btn-ghost" href="{{ "/fiction-and-poetry/" | relURL }}">Read the writing</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{{ end }}
